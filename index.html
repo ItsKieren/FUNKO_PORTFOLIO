@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Funko Pop Collection | Bleach & Boruto</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --pure-white: #ffffff;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333333;
+            --accent-gray: #666666;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--pure-white);
+            color: var(--primary-black);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Header */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--pure-white);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-item {
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--primary-black);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item:hover {
+            color: var(--accent-gray);
+        }
+
+        /* Collection Navigation Tabs */
+        .collection-nav {
+            background-color: var(--pure-white);
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 80px;
+            z-index: 999;
+            margin-top: 80px;
+        }
+
+        .collection-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid var(--primary-black);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .collection-tab {
+            flex: 1;
+            padding: 1rem 2rem;
+            background-color: var(--pure-white);
+            color: var(--primary-black);
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .collection-tab.active {
+            background-color: var(--primary-black);
+            color: var(--pure-white);
+        }
+
+        .collection-tab:hover:not(.active) {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Collection Content */
+        .portfolio-gallery .collection-content {
+            display: none;
+        }
+
+        .portfolio-gallery .collection-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+
+        /* Header Section */
+        .header {
+            height: 70vh;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--pure-white) 0%, var(--light-gray) 100%);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding-top: 80px;
+            transition: background-image 0.5s ease;
+        }
+
+        .header.boruto-bg {
+            background-image: url('./TBV/zero.png');
+        }
+
+        .header.boruto-bg::before {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .header.boruto-bg .tagline,
+        .header.boruto-bg .welcome-text {
+            color: var(--pure-white);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="0.5" fill="%23000" opacity="0.02"/><circle cx="75" cy="75" r="0.3" fill="%23000" opacity="0.02"/><circle cx="50" cy="10" r="0.4" fill="%23000" opacity="0.02"/><circle cx="20" cy="80" r="0.6" fill="%23000" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+
+
+        .tagline {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--primary-black);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-text {
+            font-size: clamp(1rem, 1.6vw, 1.3rem);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: var(--dark-gray);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            line-height: 1.5;
+            text-transform: none;
+            max-width: 600px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-gray);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Portfolio Gallery */
+        .portfolio-gallery {
+            padding: 1rem 0 2rem 0;
+            background-color: var(--pure-white);
+        }
+
+        .image-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+
+        .character-name {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+            font-weight: 700;
+            font-style: normal;
+            text-align: center;
+            color: var(--primary-black);
+            margin: 1rem 0 1.5rem 0;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+        }
+
+
+        /* Footer Section */
+        .footer {
+            background-color: var(--primary-black);
+            color: var(--pure-white);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-intro {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-description {
+            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+            font-weight: 400;
+            color: #e0e0e0;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--pure-white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            padding: 1rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .contact-link:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #888888;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-header {
+                padding: 1rem;
+                gap: 2rem;
+            }
+            
+            .header {
+                padding: 2rem 1rem;
+                height: 60vh;
+                min-height: 450px;
+            }
+            
+            .collection-nav {
+                padding: 1.5rem 1rem;
+            }
+            
+            .collection-tabs {
+                max-width: 400px;
+            }
+            
+            .collection-tab {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .image-container {
+                padding: 0 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .contact-links {
+                gap: 2rem;
+            }
+            
+            .footer {
+                padding: 3rem 1rem 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-header {
+                gap: 1.5rem;
+            }
+            
+            .nav-item {
+                font-size: 0.9rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .collection-nav {
+                padding: 1rem;
+            }
+            
+            .collection-tabs {
+                max-width: 320px;
+            }
+            
+            .collection-tab {
+                padding: 0.7rem 1rem;
+                font-size: 0.85rem;
+                letter-spacing: 0.08em;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .contact-link {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Smooth scroll for image transitions */
+        .portfolio-gallery {
+            scroll-snap-type: y mandatory;
+        }
+
+        .image-container {
+            scroll-snap-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+        <a href="#home" class="nav-item">HOME</a>
+        <a href="#designs" class="nav-item">DESIGNS</a>
+        <a href="#contact" class="nav-item">CONTACT</a>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="header" id="home">
+        <p class="tagline">WELCOME</p>
+        <div class="welcome-text">Anime Funko Pop Collection<br>Featuring Bleach & Boruto Characters</div>
+        <div class="scroll-indicator">Scroll to explore the collections ↓</div>
+    </header>
+
+    <!-- Collection Navigation -->
+    <div class="collection-nav">
+        <div class="collection-tabs">
+            <button class="collection-tab active" onclick="showCollection('bleach')">BLEACH</button>
+            <button class="collection-tab" onclick="showCollection('boruto')">BORUTO</button>
+        </div>
+    </div>
+
+    <!-- Portfolio Gallery -->
+    <main class="portfolio-gallery" id="designs">
+        <!-- Bleach Collection -->
+        <div class="collection-content active" id="bleach-collection">
+        <div class="image-container loading">
+            <img src="./TYBW/a.png" alt="Quincy Design A" class="portfolio-image">
+        </div>
+        <div class="character-name">Uryu Ishida</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/b.png" alt="Quincy Design B" class="portfolio-image">
+        </div>
+        <div class="character-name">Jugram Haschwalth</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/c.png" alt="Quincy Design C" class="portfolio-image">
+        </div>
+        <div class="character-name">Pernida Parnkgjas</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/d.png" alt="Quincy Design D" class="portfolio-image">
+        </div>
+        <div class="character-name">Askin Nakk Le Vaar</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/e.png" alt="Quincy Design E" class="portfolio-image">
+        </div>
+        <div class="character-name">Bambietta Basterbine</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/f.png" alt="Quincy Design F" class="portfolio-image">
+        </div>
+        <div class="character-name">Äs Nödt</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/g.png" alt="Quincy Design G" class="portfolio-image">
+        </div>
+        <div class="character-name">Lille Barro</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/h.png" alt="Quincy Design H" class="portfolio-image">
+        </div>
+        <div class="character-name">Bazz-B</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/i.png" alt="Quincy Design I" class="portfolio-image">
+        </div>
+        <div class="character-name">Cang Du</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/j.png" alt="Quincy Design J" class="portfolio-image">
+        </div>
+        <div class="character-name">Quilge Opie</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/k.png" alt="Quincy Design K" class="portfolio-image">
+        </div>
+        <div class="character-name">BG9</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/l.png" alt="Quincy Design L" class="portfolio-image">
+        </div>
+        <div class="character-name">Pepe Waccabrada</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/m.png" alt="Quincy Design M" class="portfolio-image">
+        </div>
+        <div class="character-name">Gerard Valkyrie</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/n.png" alt="Quincy Design N" class="portfolio-image">
+        </div>
+        <div class="character-name">Robert Accutrone</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/o.png" alt="Quincy Design O" class="portfolio-image">
+        </div>
+        <div class="character-name">Driscoll Berci</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/p.png" alt="Quincy Design P" class="portfolio-image">
+        </div>
+        <div class="character-name">Meninas McAllon</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/q.png" alt="Quincy Design Q" class="portfolio-image">
+        </div>
+        <div class="character-name">Berenice Gabrielli</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/r.png" alt="Quincy Design R" class="portfolio-image">
+        </div>
+        <div class="character-name">Jerome Guizbatt</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/s.png" alt="Quincy Design S" class="portfolio-image">
+        </div>
+        <div class="character-name">Mask De Masculine</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/t.png" alt="Quincy Design T" class="portfolio-image">
+        </div>
+        <div class="character-name">Candice Catnipp</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/u.png" alt="Quincy Design U" class="portfolio-image">
+        </div>
+        <div class="character-name">NaNaNa Najahkoop</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/v.png" alt="Quincy Design V" class="portfolio-image">
+        </div>
+        <div class="character-name">Gremmy Thoumeaux</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/w.png" alt="Quincy Design W" class="portfolio-image">
+        </div>
+        <div class="character-name">Nianzol Weizol</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/x.png" alt="Quincy Design X" class="portfolio-image">
+        </div>
+        <div class="character-name">Liltotto Lamperd</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/y.png" alt="Quincy Design Y" class="portfolio-image">
+        </div>
+        <div class="character-name">Loyd Lloyd</div>
+
+        <div class="image-container loading">
+            <img src="./TYBW/z.png" alt="Quincy Design Z" class="portfolio-image">
+        </div>
+        <div class="character-name">Giselle Gewelle</div>
+        </div>
+        
+        <!-- Boruto Collection -->
+        <div class="collection-content" id="boruto-collection">
+            <div class="image-container loading">
+                <img src="./TBV/one.png" alt="Boruto Character 1" class="portfolio-image">
+            </div>
+            <div class="character-name">Boruto Character 1</div>
+
+            <div class="image-container loading">
+                <img src="./TBV/two.png" alt="Boruto Character 2" class="portfolio-image">
+            </div>
+            <div class="character-name">Boruto Character 2</div>
+
+            <div class="image-container loading">
+                <img src="./TBV/three.png" alt="Boruto Character 3" class="portfolio-image">
+            </div>
+            <div class="character-name">Boruto Character 3</div>
+
+            <div class="image-container loading">
+                <img src="./TBV/four.png" alt="Boruto Character 4" class="portfolio-image">
+            </div>
+            <div class="character-name">Boruto Character 4</div>
+
+            <div class="image-container loading">
+                <img src="./TBV/five.png" alt="Boruto Character 5" class="portfolio-image">
+            </div>
+            <div class="character-name">Boruto Character 5</div>
+
+            <div class="image-container loading">
+                <img src="./TBV/six.png" alt="Boruto Character 6" class="portfolio-image">
+            </div>
+            <div class="character-name">Boruto Character 6</div>
+
+            <div class="image-container loading">
+                <img src="./TBV/seven.png" alt="Boruto Character 7" class="portfolio-image">
+            </div>
+            <div class="character-name">Boruto Character 7</div>
+
+            <div class="image-container loading">
+                <img src="./TBV/eight.png" alt="Boruto Character 8" class="portfolio-image">
+            </div>
+            <div class="character-name">Boruto Character 8</div>
+        </div>
+    </main>
+
+    <!-- Footer / Contact Section -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <h2 class="contact-intro">Get In Touch</h2>
+            <p class="contact-description">
+                Interested in custom Funko Pop designs or collaborative projects? 
+                Feel free to reach out through any of the channels below.
+            </p>
+            
+            <div class="contact-links">
+                <a href="mailto:contact@ecstacy.design" class="contact-link">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    Email
+                </a>
+                <a href="https://www.instagram.com/thisisecstacy/?hl=en" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3z"/>
+                    </svg>
+                    Instagram
+                </a>
+                <a href="https://github.com/ItsKieren" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 All rights reserved. | Anime Funko Pop Collection</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth loading animation for images
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
+                    entry.target.classList.add('loading');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all image containers
+        document.querySelectorAll('.image-container').forEach(container => {
+            observer.observe(container);
+        });
+
+        // Initialize collections
+        function initializeCollections() {
+            // Make sure Bleach is active by default
+            document.getElementById('bleach-collection')?.classList.add('active');
+            document.getElementById('boruto-collection')?.classList.remove('active');
+        }
+
+        // Smooth scroll behavior enhancement
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCollections();
+            // Add staggered loading animation
+            const imageContainers = document.querySelectorAll('.image-container');
+            imageContainers.forEach((container, index) => {
+                container.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Lazy loading for better performance
+            const images = document.querySelectorAll('.portfolio-image');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.style.opacity = '1';
+                        img.style.transform = 'scale(1)';
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => {
+                img.style.opacity = '0';
+                img.style.transform = 'scale(0.95)';
+                img.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                imageObserver.observe(img);
+            });
+        });
+        
+        // Collection switching functionality
+        function showCollection(collectionName) {
+            // Switch collections
+            document.querySelectorAll('.collection-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.collection-tab').forEach(t => t.classList.remove('active'));
+            
+            // Activate selected collection and tab
+            document.getElementById(collectionName + '-collection')?.classList.add('active');
+            document.querySelector(`[onclick*="${collectionName}"]`)?.classList.add('active');
+            
+            // Switch header background
+            const header = document.querySelector('.header');
+            if (collectionName === 'boruto') {
+                header.classList.add('boruto-bg');
+            } else {
+                header.classList.remove('boruto-bg');
+            }
+        }
+        
+        // Make function available globally
+        window.showCollection = showCollection;
+
+        // Smooth scroll to top functionality
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                // Additional scroll-based animations can be added here
+            }, 100);
+        });
+    </script>
+</body>
+</html>
