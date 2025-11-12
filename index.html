@@ -1,9 +1,11 @@
+--- START OF FILE index.html ---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Funko Pop Collection | Bleach & Boruto</title>
+    <title>Anime Funko Pop Collection | Bleach, Boruto & Gachiakuta</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
         
@@ -80,7 +82,7 @@
             display: flex;
             justify-content: center;
             gap: 0;
-            max-width: 600px;
+            max-width: 800px; /* Increased width to accommodate 3 tabs */
             margin: 0 auto;
             border: 2px solid var(--primary-black);
             border-radius: 50px;
@@ -137,27 +139,48 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, var(--pure-white) 0%, var(--light-gray) 100%);
+            /* Default background will be set by JS/initial class */
             background-size: cover;
             background-position: center;
             position: relative;
             padding-top: 80px;
             transition: background-image 0.5s ease;
+            color: var(--primary-black); /* Default text color for non-image background */
+        }
+        
+        /* Specific Header Backgrounds */
+        .header.bleach-bg {
+            background-image: url('./TYBW/TYBW00.png');
+            background-color: var(--light-gray);
         }
 
         .header.boruto-bg {
-            background-image: url('./TBV/zero.png');
+            background-image: url('./TBV/TBVLANDING.png');
+            background-color: var(--dark-gray);
         }
-
-        .header.boruto-bg::before {
+        
+        .header.gk-bg {
+            background-image: url('./GK/LANDING.png');
+            background-color: var(--dark-gray);
+        }
+        
+        /* Overlay and Text Coloring for image backgrounds */
+        .header.bleach-bg::before,
+        .header.boruto-bg::before,
+        .header.gk-bg::before {
             background: rgba(0, 0, 0, 0.4);
         }
 
+        .header.bleach-bg .tagline,
+        .header.bleach-bg .welcome-text,
         .header.boruto-bg .tagline,
-        .header.boruto-bg .welcome-text {
+        .header.boruto-bg .welcome-text,
+        .header.gk-bg .tagline,
+        .header.gk-bg .welcome-text {
             color: var(--pure-white);
             text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
         }
+
 
         .header::before {
             content: '';
@@ -168,6 +191,7 @@
             bottom: 0;
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="0.5" fill="%23000" opacity="0.02"/><circle cx="75" cy="75" r="0.3" fill="%23000" opacity="0.02"/><circle cx="50" cy="10" r="0.4" fill="%23000" opacity="0.02"/><circle cx="20" cy="80" r="0.6" fill="%23000" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
             pointer-events: none;
+            transition: background 0.5s ease;
         }
 
 
@@ -204,8 +228,9 @@
             font-weight: 400;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--accent-gray);
+            color: var(--pure-white); /* Changed to white for dark backgrounds */
             animation: bounce 2s infinite;
+            z-index: 1;
         }
 
         @keyframes bounce {
@@ -345,7 +370,7 @@
             }
             
             .collection-tabs {
-                max-width: 400px;
+                max-width: 500px; /* Adjusted for 3 tabs */
             }
             
             .collection-tab {
@@ -385,7 +410,7 @@
             }
             
             .collection-tabs {
-                max-width: 320px;
+                max-width: 380px; /* Adjusted for 3 tabs */
             }
             
             .collection-tab {
@@ -438,10 +463,10 @@
         <a href="#contact" class="nav-item">CONTACT</a>
     </nav>
 
-    <!-- Header Section -->
-    <header class="header" id="home">
+    <!-- Header Section (Defaulting to Bleach background) -->
+    <header class="header bleach-bg" id="home">
         <p class="tagline">WELCOME</p>
-        <div class="welcome-text">Anime Funko Pop Collection<br>Featuring Bleach & Boruto Characters</div>
+        <div class="welcome-text">Anime Funko Pop Collection<br>Featuring Bleach, Boruto & Gachiakuta Characters</div>
         <div class="scroll-indicator">Scroll to explore the collections ↓</div>
     </header>
 
@@ -450,185 +475,249 @@
         <div class="collection-tabs">
             <button class="collection-tab active" onclick="showCollection('bleach')">BLEACH</button>
             <button class="collection-tab" onclick="showCollection('boruto')">BORUTO</button>
+            <button class="collection-tab" onclick="showCollection('gk')">GACHIAKUTA</button>
         </div>
     </div>
 
     <!-- Portfolio Gallery -->
     <main class="portfolio-gallery" id="designs">
-        <!-- Bleach Collection -->
+        <!-- Bleach Collection (TYBW) - Active by default -->
         <div class="collection-content active" id="bleach-collection">
         <div class="image-container loading">
-            <img src="./TYBW/a.png" alt="Quincy Design A" class="portfolio-image">
+            <img src="./TYBW/TYBW01.png" alt="Quincy Design 01" class="portfolio-image">
         </div>
         <div class="character-name">Uryu Ishida</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/b.png" alt="Quincy Design B" class="portfolio-image">
+            <img src="./TYBW/TYBW02.png" alt="Quincy Design 02" class="portfolio-image">
         </div>
         <div class="character-name">Jugram Haschwalth</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/c.png" alt="Quincy Design C" class="portfolio-image">
+            <img src="./TYBW/TYBW03.png" alt="Quincy Design 03" class="portfolio-image">
         </div>
         <div class="character-name">Pernida Parnkgjas</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/d.png" alt="Quincy Design D" class="portfolio-image">
+            <img src="./TYBW/TYBW04.png" alt="Quincy Design 04" class="portfolio-image">
         </div>
         <div class="character-name">Askin Nakk Le Vaar</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/e.png" alt="Quincy Design E" class="portfolio-image">
+            <img src="./TYBW/TYBW05.png" alt="Quincy Design 05" class="portfolio-image">
         </div>
         <div class="character-name">Bambietta Basterbine</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/f.png" alt="Quincy Design F" class="portfolio-image">
+            <img src="./TYBW/TYBW06.png" alt="Quincy Design 06" class="portfolio-image">
         </div>
         <div class="character-name">Äs Nödt</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/g.png" alt="Quincy Design G" class="portfolio-image">
+            <img src="./TYBW/TYBW07.png" alt="Quincy Design 07" class="portfolio-image">
         </div>
         <div class="character-name">Lille Barro</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/h.png" alt="Quincy Design H" class="portfolio-image">
+            <img src="./TYBW/TYBW08.png" alt="Quincy Design 08" class="portfolio-image">
         </div>
         <div class="character-name">Bazz-B</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/i.png" alt="Quincy Design I" class="portfolio-image">
+            <img src="./TYBW/TYBW09.png" alt="Quincy Design 09" class="portfolio-image">
         </div>
         <div class="character-name">Cang Du</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/j.png" alt="Quincy Design J" class="portfolio-image">
+            <img src="./TYBW/TYBW10.png" alt="Quincy Design 10" class="portfolio-image">
         </div>
         <div class="character-name">Quilge Opie</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/k.png" alt="Quincy Design K" class="portfolio-image">
+            <img src="./TYBW/TYBW11.png" alt="Quincy Design 11" class="portfolio-image">
         </div>
         <div class="character-name">BG9</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/l.png" alt="Quincy Design L" class="portfolio-image">
+            <img src="./TYBW/TYBW12.png" alt="Quincy Design 12" class="portfolio-image">
         </div>
         <div class="character-name">Pepe Waccabrada</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/m.png" alt="Quincy Design M" class="portfolio-image">
+            <img src="./TYBW/TYBW13.png" alt="Quincy Design 13" class="portfolio-image">
         </div>
         <div class="character-name">Gerard Valkyrie</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/n.png" alt="Quincy Design N" class="portfolio-image">
+            <img src="./TYBW/TYBW14.png" alt="Quincy Design 14" class="portfolio-image">
         </div>
         <div class="character-name">Robert Accutrone</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/o.png" alt="Quincy Design O" class="portfolio-image">
+            <img src="./TYBW/TYBW15.png" alt="Quincy Design 15" class="portfolio-image">
         </div>
         <div class="character-name">Driscoll Berci</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/p.png" alt="Quincy Design P" class="portfolio-image">
+            <img src="./TYBW/TYBW16.png" alt="Quincy Design 16" class="portfolio-image">
         </div>
         <div class="character-name">Meninas McAllon</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/q.png" alt="Quincy Design Q" class="portfolio-image">
+            <img src="./TYBW/TYBW17.png" alt="Quincy Design 17" class="portfolio-image">
         </div>
         <div class="character-name">Berenice Gabrielli</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/r.png" alt="Quincy Design R" class="portfolio-image">
+            <img src="./TYBW/TYBW18.png" alt="Quincy Design 18" class="portfolio-image">
         </div>
         <div class="character-name">Jerome Guizbatt</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/s.png" alt="Quincy Design S" class="portfolio-image">
+            <img src="./TYBW/TYBW19.png" alt="Quincy Design 19" class="portfolio-image">
         </div>
         <div class="character-name">Mask De Masculine</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/t.png" alt="Quincy Design T" class="portfolio-image">
+            <img src="./TYBW/TYBW20.png" alt="Quincy Design 20" class="portfolio-image">
         </div>
         <div class="character-name">Candice Catnipp</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/u.png" alt="Quincy Design U" class="portfolio-image">
+            <img src="./TYBW/TYBW21.png" alt="Quincy Design 21" class="portfolio-image">
         </div>
         <div class="character-name">NaNaNa Najahkoop</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/v.png" alt="Quincy Design V" class="portfolio-image">
+            <img src="./TYBW/TYBW22.png" alt="Quincy Design 22" class="portfolio-image">
         </div>
         <div class="character-name">Gremmy Thoumeaux</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/w.png" alt="Quincy Design W" class="portfolio-image">
+            <img src="./TYBW/TYBW23.png" alt="Quincy Design 23" class="portfolio-image">
         </div>
         <div class="character-name">Nianzol Weizol</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/x.png" alt="Quincy Design X" class="portfolio-image">
+            <img src="./TYBW/TYBW24.png" alt="Quincy Design 24" class="portfolio-image">
         </div>
         <div class="character-name">Liltotto Lamperd</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/y.png" alt="Quincy Design Y" class="portfolio-image">
+            <img src="./TYBW/TYBW25.png" alt="Quincy Design 25" class="portfolio-image">
         </div>
         <div class="character-name">Loyd Lloyd</div>
 
         <div class="image-container loading">
-            <img src="./TYBW/z.png" alt="Quincy Design Z" class="portfolio-image">
+            <img src="./TYBW/TYBW26.png" alt="Quincy Design 26" class="portfolio-image">
         </div>
         <div class="character-name">Giselle Gewelle</div>
         </div>
         
-        <!-- Boruto Collection -->
+        <!-- Boruto Collection (TBV) -->
         <div class="collection-content" id="boruto-collection">
             <div class="image-container loading">
-                <img src="./TBV/one.png" alt="Boruto Ōtsutsuki" class="portfolio-image">
+                <img src="./TBV/TBV01.png" alt="Boruto Ōtsutsuki 01" class="portfolio-image">
             </div>
             <div class="character-name">Boruto Ōtsutsuki</div>
 
             <div class="image-container loading">
-                <img src="./TBV/two.png" alt="Boruto Otsutsuki" class="portfolio-image">
+                <img src="./TBV/TBV02.png" alt="Boruto Otsutsuki 02" class="portfolio-image">
             </div>
             <div class="character-name">Boruto Otsutsuki</div>
 
             <div class="image-container loading">
-                <img src="./TBV/three.png" alt="Sarada Uchiha" class="portfolio-image">
+                <img src="./TBV/TBV03.png" alt="Sarada Uchiha" class="portfolio-image">
             </div>
             <div class="character-name">Sarada Uchiha</div>
 
             <div class="image-container loading">
-                <img src="./TBV/four.png" alt="Kawaki Uzamaki" class="portfolio-image">
+                <img src="./TBV/TBV04.png" alt="Kawaki Uzamaki" class="portfolio-image">
             </div>
             <div class="character-name">Kawaki Uzamaki</div>
 
             <div class="image-container loading">
-                <img src="./TBV/five.png" alt="Himawari Uzamaki" class="portfolio-image">
+                <img src="./TBV/TBV05.png" alt="Himawari Uzamaki" class="portfolio-image">
             </div>
             <div class="character-name">Himawari Uzamaki</div>
 
             <div class="image-container loading">
-                <img src="./TBV/six.png" alt="Code" class="portfolio-image">
+                <img src="./TBV/TBV06.png" alt="Code" class="portfolio-image">
             </div>
             <div class="character-name">Code</div>
 
             <div class="image-container loading">
-                <img src="./TBV/seven.png" alt="Mitsuki" class="portfolio-image">
+                <img src="./TBV/TBV07.png" alt="Mitsuki" class="portfolio-image">
             </div>
             <div class="character-name">Mitsuki</div>
 
             <div class="image-container loading">
-                <img src="./TBV/eight.png" alt="Daemon" class="portfolio-image">
+                <img src="./TBV/TBV08.png" alt="Daemon" class="portfolio-image">
             </div>
             <div class="character-name">Daemon</div>
+        </div>
+
+        <!-- GK Collection (Gachiakuta) -->
+        <div class="collection-content" id="gk-collection">
+            <div class="image-container loading">
+                <img src="./GK/GK01.png" alt="RUDO SUREBREC" class="portfolio-image">
+            </div>
+            <div class="character-name">RUDO SUREBREC</div>
+
+            <div class="image-container loading">
+                <img src="./GK/GK02.png" alt="ZANKA NIJIKU" class="portfolio-image">
+            </div>
+            <div class="character-name">ZANKA NIJIKU</div>
+
+            <div class="image-container loading">
+                <img src="./GK/GK03.png" alt="RIYO REAPER" class="portfolio-image">
+            </div>
+            <div class="character-name">RIYO REAPER</div>
+
+            <div class="image-container loading">
+                <img src="./GK/GK04.png" alt="ENJIN" class="portfolio-image">
+            </div>
+            <div class="character-name">ENJIN</div>
+
+            <div class="image-container loading">
+                <img src="./GK/GK05.png" alt="JABBER WONGER" class="portfolio-image">
+            </div>
+            <div class="character-name">JABBER WONGER</div>
+
+            <div class="image-container loading">
+                <img src="./GK/GK06.png" alt="ZODYN TYPHON" class="portfolio-image">
+            </div>
+            <div class="character-name">ZODYN TYPHON</div>
+
+            <div class="image-container loading">
+                <img src="./GK/GK07.png" alt="NOERDE HEW AMOZ" class="portfolio-image">
+            </div>
+            <div class="character-name">NOERDE HEW AMOZ</div>
+
+            <div class="image-container loading">
+                <img src="./GK/GK08.png" alt="EISHA STILZA" class="portfolio-image">
+            </div>
+            <div class="character-name">EISHA STILZA</div>
+
+            <div class="image-container loading">
+                <img src="./GK/GK09.png" alt="AUGUST STILZA" class="portfolio-image">
+            </div>
+            <div class="character-name">AUGUST STILZA</div>
+
+            <div class="image-container loading">
+                <img src="./GK/GK10.png" alt="TAMSY CAINES" class="portfolio-image">
+            </div>
+            <div class="character-name">TAMSY CAINES</div>
+
+            <div class="image-container loading">
+                <img src="./GK/GK11.png" alt="GUITA HEBBY FANTASIA" class="portfolio-image">
+            </div>
+            <div class="character-name">GUITA HEBBY FANTASIA</div>
+
+            <div class="image-container loading">
+                <img src="./GK/GK12.png" alt="SEMIU GRIER" class="portfolio-image">
+            </div>
+            <div class="character-name">SEMIU GRIER</div>
         </div>
     </main>
 
@@ -642,7 +731,7 @@
             </p>
             
             <div class="contact-links">
-                <a href="mailto:contact@ecstacy.design" class="contact-link">
+                <a href="mailto:coudntthinkemail@gmail.com" class="contact-link">
                     <svg class="contact-icon" viewBox="0 0 24 24">
                         <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                     </svg>
@@ -689,19 +778,49 @@
             observer.observe(container);
         });
 
-        // Initialize collections
-        function initializeCollections() {
-            // Make sure Bleach is active by default
-            document.getElementById('bleach-collection')?.classList.add('active');
-            document.getElementById('boruto-collection')?.classList.remove('active');
-        }
+        // Collection switching functionality
+        function showCollection(collectionName) {
+            // Define all collection names and header classes
+            const allCollections = ['bleach', 'boruto', 'gk'];
+            const headerClasses = ['bleach-bg', 'boruto-bg', 'gk-bg'];
+            const header = document.querySelector('.header');
 
-        // Smooth scroll behavior enhancement
+            // 1. Switch collections
+            document.querySelectorAll('.collection-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.collection-tab').forEach(t => t.classList.remove('active'));
+            
+            // Activate selected collection and tab
+            document.getElementById(collectionName + '-collection')?.classList.add('active');
+            document.querySelector(`[onclick*="${collectionName}"]`)?.classList.add('active');
+            
+            // 2. Switch header background
+            headerClasses.forEach(c => header.classList.remove(c));
+            header.classList.add(`${collectionName}-bg`);
+
+            // 3. Update welcome text for new collection (optional enhancement)
+            const welcomeTextElement = document.querySelector('.welcome-text');
+            let subtitle = 'Featuring Bleach, Boruto & Gachiakuta Characters';
+            if (collectionName === 'bleach') {
+                subtitle = 'Bleach: Thousand-Year Blood War Funko Pop Concepts';
+            } else if (collectionName === 'boruto') {
+                subtitle = 'Boruto: Two Blue Vortex Funko Pop Concepts';
+            } else if (collectionName === 'gk') {
+                subtitle = 'Gachiakuta Funko Pop Concepts';
+            }
+            welcomeTextElement.innerHTML = `Anime Funko Pop Collection<br>${subtitle}`;
+        }
+        
+        // Initialize collections and other DOM-related scripts
         document.addEventListener('DOMContentLoaded', function() {
-            initializeCollections();
+            // Since the HTML defaults to 'bleach', we just need to ensure the logic is correct on load.
+            // Explicitly call showCollection for 'bleach' to apply all JS logic for the default state
+            // (e.g., updating the welcome text, though less critical now).
+            // window.showCollection('bleach'); // Optional, since HTML is already set up, but good practice.
+            
             // Add staggered loading animation
             const imageContainers = document.querySelectorAll('.image-container');
             imageContainers.forEach((container, index) => {
+                // Ensure only visible images get initial loading animation delay if switching rapidly
                 container.style.animationDelay = `${index * 0.1}s`;
             });
 
@@ -726,36 +845,8 @@
             });
         });
         
-        // Collection switching functionality
-        function showCollection(collectionName) {
-            // Switch collections
-            document.querySelectorAll('.collection-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.collection-tab').forEach(t => t.classList.remove('active'));
-            
-            // Activate selected collection and tab
-            document.getElementById(collectionName + '-collection')?.classList.add('active');
-            document.querySelector(`[onclick*="${collectionName}"]`)?.classList.add('active');
-            
-            // Switch header background
-            const header = document.querySelector('.header');
-            if (collectionName === 'boruto') {
-                header.classList.add('boruto-bg');
-            } else {
-                header.classList.remove('boruto-bg');
-            }
-        }
-        
         // Make function available globally
         window.showCollection = showCollection;
-
-        // Smooth scroll to top functionality
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                // Additional scroll-based animations can be added here
-            }, 100);
-        });
     </script>
 </body>
 </html>
